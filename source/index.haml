@@ -1,0 +1,106 @@
+---
+title: KRAM widget
+---
+
+#widget
+  %header
+    %h1 Har du det godt?
+    %h2.subtle-text Chat, brevkasser og debatter om sundhed.
+
+  %section.chat
+    %h3
+      %a{href: "http://cyberhus.dk/chatr%C3%A5dgivning", target: "_blank", title: "Chatrådgivning i Cyberhus"}
+        %i.icn-chat
+        Chatrådgivning
+        %i.arrow
+    %p Chat om sundhed og andre emner med unge og voksne rådgivere.
+
+  %section.letterbox
+    %h3
+      %a{href: "http://cyberhus.dk/brevkasse", target: "_blank", title: "Brevkasser i Cyberhus"}
+        %i.icn-letterbox
+        Brevkasser
+        %i.arrow
+    %ul#letterbox-container
+    -# commented out
+      %ul
+        - data.cyberhus.letterbox.each do |f|
+          %li
+            %a{href: "#"}
+              %i.arrow
+              %span
+                = f.title
+                %time #{f.time}
+
+  %section.forum
+    %h3
+      %a{href: "http://cyberhus.dk/debat", target: "_blank", title: "Debatter i Cyberhus"}
+        %i.icn-forum
+        Debatter
+        %i.arrow
+    %ul#forum-container
+    -# commented out
+      %ul
+        - data.cyberhus.forum.each do |f|
+          %li
+            %a{href: "#"}
+              %i.arrow
+              %span
+                = f.title
+                %time #{f.time}
+
+  %footer
+    %p.subtle-text Et samarbejde mellem Cyberhus og Københavns Kommune.
+    %a.logo-cyberhus{href: "http://cyberhus.dk", target: "_blank", title: "Cyberhus"}
+      %i
+    %a.logo-kk{href: "http://kk.dk", target: "_blank", title: "Københavns kommune"}
+      %i
+:javascript
+  //jsonp for incl. forum
+  function forum(nodes){
+
+    var nodesOutput = '';
+    var length = nodes.length;
+
+    for (var i = 0; i < length; i++) {
+      node = nodes[i].node;
+      nodesOutput += '<li><a target="_blank" title="Læs indlæget på Cyberhus" href="' + node.sti + '"><i class="arrow"></i><span>' + node.title + ' <time>' + node.dato + '</time></span></a></li>';
+    }
+    document.getElementById("forum-container").innerHTML = nodesOutput;
+  }
+  // jsonp for incl. letterbox
+  function letterbox(nodes){
+
+    var nodesOutput = '';
+    var length = nodes.length;
+
+    for (var i = 0; i < length; i++) {
+      node = nodes[i].node;
+      nodesOutput += '<li><a target="_blank" title="Læs brevkassespørgsmålet og svaret på Cyberhus" href="' + node.sti + '"><i class="arrow"></i><span>' + node.title + ' <time>' + node.dato + '</time></span></a></li>';
+    }
+    document.getElementById("letterbox-container").innerHTML = nodesOutput;
+  }
+
+  // Based on https://github.com/johnymonster/iframe_height
+  // Child script
+  var messageParent = function(scrollTop){
+    var h = document.body.scrollHeight;
+    h = (scrollTop)? h+'s':h;
+    if(top.postMessage){
+      top.postMessage( h , '*');
+    } else {
+      window.location.hash = 'h'+h;
+    }
+  }
+
+  // Child Loader
+  window.onload = function() {
+    messageParent();
+  }
+
+  window.onresize = function() {
+    messageParent();
+  }
+
+
+
