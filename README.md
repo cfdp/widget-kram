@@ -1,4 +1,4 @@
-widget-kram
+KRAM widget
 ===========
 
 A responsive iframe widget which is display dynamic data via jsonp.
