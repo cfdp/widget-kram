@@ -1,5 +1,6 @@
 ---
 title: KRAM widget
+utm: ?utm_source=kram&utm_medium=widget&utm_campaign=kramwidget
 ---
 
 #widget
@@ -9,7 +10,7 @@ title: KRAM widget
 
   %section.chat
     %h3
-      %a{href: "http://cyberhus.dk/chatr%C3%A5dgivning", target: "_blank", title: "Chatrådgivning i Cyberhus"}
+      %a{href: "http://cyberhus.dk/chatr%C3%A5dgivning#{current_page.data.utm}", target: "_blank", title: "Chatrådgivning i Cyberhus"}
         %i.icn-chat
         Chatrådgivning
         %i.arrow
@@ -17,7 +18,7 @@ title: KRAM widget
 
   %section.letterbox
     %h3
-      %a{href: "http://cyberhus.dk/brevkasse", target: "_blank", title: "Brevkasser i Cyberhus"}
+      %a{href: "http://cyberhus.dk/brevkasse#{current_page.data.utm}", target: "_blank", title: "Brevkasser i Cyberhus"}
         %i.icn-letterbox
         Brevkasser
         %i.arrow
@@ -34,7 +35,7 @@ title: KRAM widget
 
   %section.forum
     %h3
-      %a{href: "http://cyberhus.dk/debat", target: "_blank", title: "Debatter i Cyberhus"}
+      %a{href: "http://cyberhus.dk/debat#{current_page.data.utm}", target: "_blank", title: "Debatter i Cyberhus"}
         %i.icn-forum
         Debatter
         %i.arrow
@@ -51,7 +52,7 @@ title: KRAM widget
 
   %footer
     %p.subtle-text Et samarbejde mellem Cyberhus og Københavns Kommune.
-    %a.logo-cyberhus{href: "http://cyberhus.dk", target: "_blank", title: "Cyberhus"}
+    %a.logo-cyberhus{href: "http://cyberhus.dk#{current_page.data.utm}", target: "_blank", title: "Cyberhus"}
       %i
     %a.logo-kk{href: "http://kk.dk", target: "_blank", title: "Københavns kommune"}
       %i
@@ -64,7 +65,7 @@ title: KRAM widget
 
     for (var i = 0; i < length; i++) {
       node = nodes[i].node;
-      nodesOutput += '<li><a target="_blank" title="Læs indlæget på Cyberhus" href="' + node.sti + '"><i class="arrow"></i><span>' + node.title + ' <time>' + node.dato + '</time></span></a></li>';
+      nodesOutput += '<li><a target="_blank" title="Læs indlæget på Cyberhus" href="' + node.sti + '#{current_page.data.utm}"><i class="arrow"></i><span>' + node.title + ' <time>' + node.dato + '</time></span></a></li>';
     }
     document.getElementById("forum-container").innerHTML = nodesOutput;
   }
@@ -76,7 +77,7 @@ title: KRAM widget
 
     for (var i = 0; i < length; i++) {
       node = nodes[i].node;
-      nodesOutput += '<li><a target="_blank" title="Læs brevkassespørgsmålet og svaret på Cyberhus" href="' + node.sti + '"><i class="arrow"></i><span>' + node.title + ' <time>' + node.dato + '</time></span></a></li>';
+      nodesOutput += '<li><a target="_blank" title="Læs brevkassespørgsmålet og svaret på Cyberhus" href="' + node.sti + '#{current_page.data.utm}"><i class="arrow"></i><span>' + node.title + ' <time>' + node.dato + '</time></span></a></li>';
     }
     document.getElementById("letterbox-container").innerHTML = nodesOutput;
   }
